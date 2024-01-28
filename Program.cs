@@ -95,6 +95,82 @@ else
     Console.WriteLine("User has not created Time record");
 }
 
+//Edit the Time Record 
+
+//IWebElement goToLastPageBox = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
+//goToLastPageBox.Click();
+//Thread.Sleep(3000);
+
+//Click on Edit Button
+IWebElement editButton = driver.FindElement(By.XPath("//tbody/tr[last()]/td[5]/a[1]"));
+editButton.Click();
+Thread.Sleep(3000);
+
+//Edit Code in Code Textbox
+IWebElement editCodeTextbox = driver.FindElement(By.Id("Code"));
+editCodeTextbox.Clear();
+editCodeTextbox.SendKeys("Moneyhest");
+
+//Edit Description in Description Textbox
+IWebElement editDescriptionTextBox = driver.FindElement(By.Id("Description"));
+editDescriptionTextBox.Clear();
+editDescriptionTextBox.SendKeys("Good Series");
+
+Thread.Sleep(5000);
+
+//Edit Price in Price Textbox
+IWebElement editPriceOverlappingTag = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
+IWebElement editPriceTextBox = driver.FindElement(By.Id("Price"));
+editPriceOverlappingTag.Click();
+editPriceTextBox.Clear();
+editPriceOverlappingTag.Click();
+editPriceTextBox.SendKeys("500");
+
+
+//Click on save button
+IWebElement editSaveButton = driver.FindElement(By.Id("SaveButton"));
+editSaveButton.Click();
+Thread.Sleep(3000);
+
+// Click on goToLastPage Button
+//IWebElement editGoToLastPageButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
+//editGoToLastPageButton.Click();
+
+//driver.FindElement(By.LinkText("Go to the last page")).Click();
+
+IWebElement editedCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[1]/td[1]"));
+IWebElement EditedDescription = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[1]/td[3]"));
+
+if (editedCode.Text == "MoneyhestEdited" && EditedDescription.Text == "GOODEdited")
+{
+    Console.WriteLine("Time Record has been updated successfully");
+}
+else
+{
+    Console.WriteLine("Time Record has not been updated");
+}
+
+//Code for Delete Time Record
+IWebElement goToLastPageButt = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
+goToLastPageButt.Click();
+Thread.Sleep(3000);
+
+//Click on delete button
+IWebElement deleteButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[5]/a[2]"));
+deleteButton.Click();
+
+IAlert simpleAlert = driver.SwitchTo().Alert();
+simpleAlert.Accept();
+
+IWebElement lastCodeInTable = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+if (lastCodeInTable.Text == "MoneyhestEdited")
+{
+    Console.WriteLine("Time Record has not been deleted");
+}
+else
+{
+    Console.WriteLine("Time Record has been deleted successfully");
+}
 
 
 
